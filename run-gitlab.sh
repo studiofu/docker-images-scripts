@@ -1,5 +1,5 @@
 docker run --detach \
-	--hostname gitlab.example.com \
+	--hostname gitlab.192.168.1.88.nip.io \
 	--publish 30443:443 --publish 30080:80 --publish 30022:22 \
 	--name gitlab \
 	--restart always \
