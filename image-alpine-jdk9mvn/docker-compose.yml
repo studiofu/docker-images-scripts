@@ -1,0 +1,16 @@
+version: '3'
+services:
+  jdk9:
+    container_name: jdk9
+    image: jdk9mvn
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - $PWD/tmp:/tmp
+    networks:
+      - net
+networks:
+   net:
