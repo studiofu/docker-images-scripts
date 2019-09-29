@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+consul_server_1:
+image: "consul:latest"
+container_name: "consul_server_1"
+environment:
+  CONSUL_LOCAL_CONFIG: '{"leave_on_terminate": true}'
+networks:
+  app_net:
+    ipv4_address: 172.17.0.3
+command: "agent -server -bind=172.17.0.3 -client=172.17.0.3 -retry-join=172.17.0.2"
+
+consul_server_2:
+image: "consul:latest"
+container_name: "consul_server_2"
+ports:
+  - "8600:8600"
+  - "8500:8500"
+networks:
+  app_net:
+    ipv4_address: 172.17.0.4
+command: "agent -server -bind=172.17.0.4 -client=172.17.0.4 -retry-join=172.17.0.3 -ui"
+
+consul_server_3:
+image: "consul:latest"
+container_name: "consul_server_3"
+environment:
+  CONSUL_LOCAL_CONFIG: '{"leave_on_terminate": true}'
+networks:
+  app_net:
+    ipv4_address: 172.17.0.5
+command: "agent -server -bind=172.17.0.5 -client=172.17.0.5 -retry-join=172.17.0.4 -bootstrap-expect=3"
+
+networks:
+app_net:
+driver: bridge
+ipam:
+  config:
+  - subnet: 172.17.0.0/24
