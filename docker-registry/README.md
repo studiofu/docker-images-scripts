@@ -68,4 +68,14 @@ need to set insecure registry
 
 sudo systemctl restart docker
 
+refer to nginx ssl setting
+
+cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt
+
+update-ca-certificates
+
+restart docker
+
+sudo systemcl restart docker 
+
 

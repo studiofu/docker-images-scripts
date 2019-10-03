@@ -1,0 +1,1 @@
+ curl --insecure -u admin:abcd1234 -v -X GET https://docker.local/v2/_catalog
