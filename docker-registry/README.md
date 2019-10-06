@@ -53,4 +53,6 @@ restart docker
 
 sudo systemcl restart docker 
 
+check docker information
 
+sudo docker info
