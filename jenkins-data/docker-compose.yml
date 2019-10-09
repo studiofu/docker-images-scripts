@@ -1,5 +1,7 @@
 version: '3'
 services:
+
+  # jenkins image
   jenkins:
     container_name: jenkins
     #image: jenkins/jenkins
@@ -12,6 +14,8 @@ services:
       - $PWD/jenkins_home:/var/jenkins_home
     networks:
       - net
+
+  # centos image to simulate remote site
   remote_host:
     container_name: remote-host
     image: remote-host
@@ -21,6 +25,8 @@ services:
       context: centos7
     networks:
       - net
+
+  # mysql image
   db_host:
     container_name: db
     image: mysql:5.7
@@ -30,6 +36,8 @@ services:
       - $PWD/db_data:/var/lib/mysql
     networks:
       - net
+
+  # web image based on the remote-host image and install php
   web:
     container_name: web
     image: ansiable-web
