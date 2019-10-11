@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  gitlab:
+    restart: always
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    extra_hosts:
+     - "drone.local:192.168.1.88"
+    ports:
+    - "30080:80"
+    - "30022:22"
+    volumes:
+    - /dockvol/gitlab/config:/etc/gitlab
+    - /dockvol/gitlab/logs:/var/log/gitlab
+    - /dockvol/gitlab/data:/var/opt/gitlab
+    environment:
+    - GITLAB_HOST=gitlab.192.168.1.88.nip.io
