@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    build: 
+      context: .                                       # 讀取當前路徑的 Dockerfile
+    restart: always                                    # 虛擬機會實體機重起後，容器服務自動帶起
+    container_name: nginx                              # 容器名稱
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf  # 掛載 nginx 設定檔，可自由操控nginx設定檔
+      - ./index.html:/home/project/index.html          # 掛載專案
+    working_dir: /home/project                         # 進入容器後的預設路徑
+    ports:                                             # 容器內與容器外 Port
+      - 8899:80
+    networks:                                          # 指定使用那一條網路
+      - web_service
+
+# 表示服務用的網絡是用外部的網路，並且搜尋名稱為 「web_service」 
+# 搜尋成功後會自動與「webs」服務相連
+networks:
+  web_service:
