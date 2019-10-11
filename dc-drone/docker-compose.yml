@@ -32,6 +32,9 @@ services:
 
   drone-agent:
     image: drone/agent:latest
+    extra_hosts:
+     - "drone.local:192.168.1.88"
+     - "gitlab.local:192.168.1.88"
     container_name: drone-agent
     restart: always
     depends_on:
