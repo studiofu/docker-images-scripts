@@ -17,6 +17,9 @@ services:
         - 7020:80
     volumes: 
       - ./config.inc.php:/src/app/includes/config.inc.php
+    environment:
+      - ENV=redis-admin
+      - NAME=abcd
     networks:
       - web_service
 
