@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  redisdc:
+    image: redis:alpine
+    container_name: redis_dc
+    restart: always
+    ports: 
+      - 6379:6379
+    networks:
+      - web_service
+  redis-admin:
+    image: erikdubbelboer/phpredisadmin
+    container_name: redisAdminer
+    restart: always
+    ports:
+        - 7020:80
+    volumes: 
+      - ./config.inc.php:/src/app/includes/config.inc.php
+    networks:
+      - web_service
+
+networks:
+  web_service:
