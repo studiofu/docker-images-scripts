@@ -11,6 +11,8 @@ services:
       MYSQL_ROOT_PASSWORD: abcd1234
     volumes:
       - /dockvol/mysql-dc:/var/lib/mysql
+    ports:
+      - 3306:3306
 
 
   adminer:
