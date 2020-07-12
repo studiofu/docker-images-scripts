@@ -1,0 +1,7 @@
+version: '2'
+services:
+  memcached:
+    container_name: dc-memcached
+    image: launcher.gcr.io/google/memcached1
+    ports:
+      - '11211:11211'
