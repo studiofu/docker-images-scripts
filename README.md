@@ -1,3 +1,10 @@
+## RANCHER
+1 Master and 3 Nodes
+https://192.168.2.102/g/clusters
+
+login: admin
+password: 
+
 ## REDIS
 dc-redis
 
