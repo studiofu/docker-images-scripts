@@ -42,7 +42,39 @@ docker start [dockerid]
 
 docker pull index.texcloud.com/docker/docker_library/node:latest # use other docker repository
 
-docker run -d -p 5000:5000 registry:2  # create local registory
+### create local registry
+docker run -d -p 5000:5000 registry:2  # create local registry
+
+### store to /opt/data/registry
+docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry registry:2
+
+
+### create a volume container
+docker run -it -v /dbdata --name dbdata ubuntu
+
+### use the volume created in dbdata
+docker run -it --volumes-from dbdata --name db1 ubuntu 
+
+
+### port mapping
+docker run -d -p 5000:5000 training/webapp python app.py
+
+### link two container
+### -P         : Publish all exposed ports to the host interfaces
+
+docker run -d --name db training/postgres
+
+docker run -d -P --name web --link db:db training/webapp python app.py # --link name:alias
+
+### install ping tools
+apt-get install inetutils-ping
+
+### install ssh
+
+apt-get install openssh-server
+
+netstat -tunlp
+
 
 
 
