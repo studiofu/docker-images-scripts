@@ -1,0 +1,4 @@
+docker run --name cassandra cassandra
+
+docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+
