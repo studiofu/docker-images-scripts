@@ -3,7 +3,7 @@ version: '3.1'
 
 volumes:
   dockvol:
-    external: true
+    #external: true
 services:
 
   db:
@@ -13,7 +13,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: abcd1234
     volumes:
-            #    - /dockvol/mysql-dc:/var/lib/mysql
+      #- /dockvol/dc-mysql:/var/lib/mysql
       - dockvol:/var/lib/mysql
     ports:
       - 3306:3306
