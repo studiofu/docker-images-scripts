@@ -11,7 +11,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: abcd1234
+      - MYSQL_ROOT_PASSWORD=abcd1234
+      - MYSQL_DATABASE=database
     volumes:
       #- /dockvol/dc-mysql:/var/lib/mysql
       - dockvol:/var/lib/mysql
@@ -24,3 +25,10 @@ services:
     restart: always
     ports:
       - 7010:8080
+
+  mysqlexporter:
+    image: prom/mysqld-exporter
+    ports:
+      - "9104:9104"
+    environment:
+      - DATA_SOURCE_NAME=root:abcd1234@(db:3306)/database
