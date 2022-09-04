@@ -9,4 +9,4 @@ services:
     ports:
       - "9999:8888"
     volumes:
-      - /dockvol/dc-spark/data:/home/jovyan/work
+      - /dockvol/dc-pyspark/data:/home/jovyan/work
