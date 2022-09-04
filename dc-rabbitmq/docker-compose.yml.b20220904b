@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+
+  rabbitmq-1:
+    image: rabbitmq:3.9.22-management
+    hostname: rabbitmq-1
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=/
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_ERLANG_COOKIE=test
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks: 
+      - application
+
+  rabbitmq-2:
+    image: rabbitmq:3.9.22-management
+    hostname: rabbitmq-2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=test
+      - CLUSTERED=true
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=guest
+      - CLUSTER_WITH=rabbitmq-1
+    depends_on:
+      - rabbitmq-1
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    networks: 
+      - application
+
+  rabbitmq-3:
+    image: rabbitmq:3.9.22-management
+    hostname: rabbitmq-3
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=test
+      - CLUSTERED=true
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=guest
+      - CLUSTER_WITH=rabbitmq-1
+    depends_on:
+      - rabbitmq-1
+    ports:
+      - "5674:5672"
+      - "15674:15672"
+    networks: 
+      - application
+
+networks:
+  application:
+    driver: bridge
+
